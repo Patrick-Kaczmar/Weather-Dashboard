@@ -33,6 +33,7 @@ section {
 #currentCity {
     background-color: dimgray;
     text-align: center;
+    color: white;
 }
 
 #forcast {
