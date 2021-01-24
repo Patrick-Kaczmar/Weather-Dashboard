@@ -36,7 +36,7 @@ section {
 }
 
 #forcast {
-    background-color: rgb(32, 218, 162);
+    background-color: rgb(255, 255, 255);
     height: 350px;
 }
 
@@ -51,3 +51,4 @@ section {
 #forcast p {
     font-size: 12px;
 }
+
