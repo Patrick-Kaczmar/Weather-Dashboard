@@ -2,4 +2,52 @@ header {
     text-align: center;
     background-color: rgb(53, 53, 53);
     color: white;
+    padding: 20px 0;
+}
+
+body {
+    padding: 25px;
+    background-color: chartreuse;
+}
+
+main {
+    text-align: center;
+}
+
+#cardLabel {
+    font-size: 30px;
+    padding-left: 40px;
+}
+
+aside {
+    float: left;
+    background-color: rgb(109, 149, 194);
+}
+
+section {
+    width: 60%;
+    margin: 50px 0 0 430px;
+    height: 250px;
+}
+
+#currentCity {
+    background-color: dimgray;
+    text-align: center;
+}
+
+#forcast {
+    background-color: rgb(32, 218, 162);
+    height: 350px;
+}
+
+#forcast h1{
+    text-align: center;
+}
+
+.col {
+    padding: 15px 0px;
+}
+
+#forcast p {
+    font-size: 12px;
 }
