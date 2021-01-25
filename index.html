@@ -22,7 +22,7 @@
 
     <main>
         <h2>Search for a city:</h2>
-        <input type="text"><button id="searchBtn">Search</button>
+        <input id="userInput" type="text"><button id="searchBtn">Search</button>
     </main>
 
     <aside>
@@ -46,7 +46,7 @@
     </aside>
 
     <section id="currentCity">
-        <p>date icon</p> 
+        <p>date icon</p>
         <p>temp</p>
         <p>humidity</p>
         <p>wind</p>
@@ -117,7 +117,27 @@
 </body>
 
 <script>
-    $("body")
+
+
+    var searchBtn = $("#searchBtn")
+    var apiKey = "17f7ddc18df22bcc249395572a4c7b7c"
+    var userInput = $("#userInput")
+
+    searchBtn.on("click", function(event) {
+        event.preventDefault();
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userInput.val() + "&appid=" + apiKey
+        console.log(userInput.val());
+        console.log(queryURL);
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            console.log(response.Runtime);
+        })
+    });
+
+
 </script>
 
 </html>
