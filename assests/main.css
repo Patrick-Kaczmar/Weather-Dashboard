@@ -31,9 +31,15 @@ section {
 }
 
 #currentCity {
-    background-color: dimgray;
+    background-color: rgb(228, 214, 214);
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
+    height: 280px;
+    font-size: 19px;
+}
+
+#cityName {
+    font-weight: bold;
 }
 
 #forcast {

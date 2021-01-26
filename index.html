@@ -46,11 +46,11 @@
     </aside>
 
     <section id="currentCity">
-        <p>date icon</p>
-        <p>temp</p>
-        <p>humidity</p>
-        <p>wind</p>
-        <p>uv</p>
+        <p id="cityName"></p>
+        <p id="curTemp"></p>
+        <p id="curHumid"></p>
+        <p id="curWind"></p>
+        <p id="curUV"></p>
     </section>
 
     <section id="forcast">
@@ -122,6 +122,7 @@
     var searchBtn = $("#searchBtn")
     var apiKey = "17f7ddc18df22bcc249395572a4c7b7c"
     var userInput = $("#userInput")
+    var currentDate = new Date()
 
     searchBtn.on("click", function(event) {
         event.preventDefault();
@@ -133,7 +134,24 @@
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            console.log(response.Runtime);
+            var uvURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + apiKey
+            var curIcon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
+            $.ajax({
+                url: uvURL,
+                method: "GET"
+            }).then(function (uvResponse) {
+                console.log(uvResponse)
+                // converts kelvin to fahrenheit
+                var fahrenheit = (response.main.temp - 273.15) * 1.80 + 32
+                // cuts the number of fahrenheit to the first decimal place
+                var temp = fahrenheit.toFixed(1)
+
+                $("#cityName").html(`${response.name} ${currentDate.toLocaleDateString()} <img src="${curIcon}"></img>`)
+                $("#curTemp").html(`Temp: ${temp}&deg;F`)
+                $("#curHumid").html(`Humidity: ${uvResponse.current.humidity} %`)
+                $("#curWind").html(`Wind Speed: ${response.wind.speed} MPH`)
+                $("#curUV").html(`UV Index: ${uvResponse.current.uvi}`)
+            })
         })
     });
 
