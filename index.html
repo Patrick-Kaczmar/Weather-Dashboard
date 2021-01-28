@@ -58,56 +58,56 @@
         <div class="row">
 
             <div class="col">
-                <div id="card1" class="card bg-primary text-white" style="width: 8rem;">
+                <div id="card1" class="card bg-primary text-white" style="width: 8rem; height: 250px;">
                     <div class="card-body">
-                        <p class="date">date</p>
-                        <p class="icon">icon</p>
-                        <p class="temp">temp</p>
-                        <p class="humidity">humidity</p>
+                        <p class="bold" id="date1"></p>
+                        <p id="icon1"></p>
+                        <p id="temp1"></p>
+                        <p id="humidity1"></p>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div id="card2" class="card bg-primary text-white" style="width: 8rem;">
+                <div id="card2" class="card bg-primary text-white" style="width: 8rem; height: 250px;">
                     <div class="card-body">
-                        <p class="date">date</p>
-                        <p class="icon">icon</p>
-                        <p class="temp">temp</p>
-                        <p class="humidity">humidity</p>
+                        <p class="bold" id="date2"></p>
+                        <p id="icon2"></p>
+                        <p id="temp2"></p>
+                        <p id="humidity2"></p>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div id="card3" class="card bg-primary text-white" style="width: 8rem;">
+                <div id="card3" class="card bg-primary text-white" style="width: 8rem; height: 250px;">
                     <div class="card-body">
-                        <p class="date">date</p>
-                        <p class="icon">icon</p>
-                        <p class="temp">temp</p>
-                        <p class="humidity">humidity</p>
+                        <p class="bold" id="date3"></p>
+                        <p id="icon3"></p>
+                        <p id="temp3"></p>
+                        <p id="humidity3"></p>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div id="card4" class="card bg-primary text-white" style="width: 8rem;">
+                <div id="card4" class="card bg-primary text-white" style="width: 8rem; height: 250px;">
                     <div class="card-body">
-                        <p class="date">date</p>
-                        <p class="icon">icon</p>
-                        <p class="temp">temp</p>
-                        <p class="humidity">humidity</p>
+                        <p class="bold" id="date4"></p>
+                        <p id="icon4"></p>
+                        <p id="temp4"></p>
+                        <p id="humidity4"></p>
                     </div>
                 </div>
             </div>
 
             <div class="col">
-                <div id="card5" class="card bg-primary text-white" style="width: 8rem;">
+                <div id="card5" class="card bg-primary text-white" style="width: 8rem; height: 250px;">
                     <div class="card-body">
-                        <p class="date">date</p>
-                        <p class="icon">icon</p>
-                        <p class="temp">temp</p>
-                        <p class="humidity">humidity</p>
+                        <p class="bold" id="date5"></p>
+                        <p id="icon5"></p>
+                        <p id="temp5"></p>
+                        <p id="humidity5"></p>
                     </div>
                 </div>
             </div>
@@ -151,6 +151,40 @@
                 $("#curHumid").html(`Humidity: ${uvResponse.current.humidity} %`)
                 $("#curWind").html(`Wind Speed: ${response.wind.speed} MPH`)
                 $("#curUV").html(`UV Index: ${uvResponse.current.uvi}`)
+
+                var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + userInput.val() + "&appid=" + apiKey
+
+                $.ajax({
+                    url: fiveDay,
+                    method: "GET"
+                }).then(function (forcastResponse) {
+                    console.log(forcastResponse)
+                    
+                    $("#date1").html(`${forcastResponse.list[3].dt_txt}`.split(" ", 1))
+                    $("#date2").html(`${forcastResponse.list[11].dt_txt}`.split(" ", 1))
+                    $("#date3").html(`${forcastResponse.list[19].dt_txt}`.split(" ", 1))
+                    $("#date4").html(`${forcastResponse.list[27].dt_txt}`.split(" ", 1))
+                    $("#date5").html(`${forcastResponse.list[35].dt_txt}`.split(" ", 1))
+
+                    $("#icon1").html(`<img src="http://openweathermap.org/img/wn/${forcastResponse.list[3].weather[0].icon}@2x.png"</img>`)
+                    $("#icon2").html(`<img src="http://openweathermap.org/img/wn/${forcastResponse.list[11].weather[0].icon}@2x.png"</img>`)
+                    $("#icon3").html(`<img src="http://openweathermap.org/img/wn/${forcastResponse.list[19].weather[0].icon}@2x.png"</img>`)
+                    $("#icon4").html(`<img src="http://openweathermap.org/img/wn/${forcastResponse.list[27].weather[0].icon}@2x.png"</img>`)
+                    $("#icon5").html(`<img src="http://openweathermap.org/img/wn/${forcastResponse.list[35].weather[0].icon}@2x.png"</img>`)
+
+                    $("#temp1").html(`temp: ${((forcastResponse.list[3].main.temp - 273.15) * 1.80 + 32).toFixed(1)}&deg;F`)
+                    $("#temp2").html(`temp: ${((forcastResponse.list[11].main.temp - 273.15) * 1.80 + 32).toFixed(1)}&deg;F`)
+                    $("#temp3").html(`temp: ${((forcastResponse.list[19].main.temp - 273.15) * 1.80 + 32).toFixed(1)}&deg;F`)
+                    $("#temp4").html(`temp: ${((forcastResponse.list[27].main.temp - 273.15) * 1.80 + 32).toFixed(1)}&deg;F`)
+                    $("#temp5").html(`temp: ${((forcastResponse.list[35].main.temp - 273.15) * 1.80 + 32).toFixed(1)}&deg;F`)
+
+                    $("#humidity1").html(`humidity: ${forcastResponse.list[3].main.humidity} %`)
+                    $("#humidity2").html(`humidity: ${forcastResponse.list[11].main.humidity} %`)
+                    $("#humidity3").html(`humidity: ${forcastResponse.list[19].main.humidity} %`)
+                    $("#humidity4").html(`humidity: ${forcastResponse.list[27].main.humidity} %`)
+                    $("#humidity5").html(`humidity: ${forcastResponse.list[35].main.humidity} %`)
+
+                })
             })
         })
     });
