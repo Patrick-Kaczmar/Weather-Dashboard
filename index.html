@@ -30,17 +30,8 @@
             <div class="card-header">
                 <span id="cardLabel">Saved Cities</span>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
-                <li class="list-group-item">City</li>
+            <ul id="ul" class="list-group list-group-flush">
+
             </ul>
         </div>
     </aside>
@@ -118,14 +109,13 @@
 
 <script>
 
-
+    var ul = $("#ul")
     var searchBtn = $("#searchBtn")
     var apiKey = "17f7ddc18df22bcc249395572a4c7b7c"
     var userInput = $("#userInput")
     var currentDate = new Date()
 
-    searchBtn.on("click", function(event) {
-        event.preventDefault();
+    var ajaxSearch = function () {
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userInput.val() + "&appid=" + apiKey
         console.log(userInput.val());
         console.log(queryURL);
@@ -134,6 +124,14 @@
             method: "GET"
         }).then(function (response) {
             console.log(response);
+            saveCity();
+
+            function saveCity() {
+                if (response) {
+                    ul.prepend(`<li class="list-group-item">${userInput.val()}</li>`)
+                }
+            }
+
             var uvURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + apiKey
             var curIcon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
             $.ajax({
@@ -159,7 +157,7 @@
                     method: "GET"
                 }).then(function (forcastResponse) {
                     console.log(forcastResponse)
-                    
+
                     $("#date1").html(`${forcastResponse.list[3].dt_txt}`.split(" ", 1))
                     $("#date2").html(`${forcastResponse.list[11].dt_txt}`.split(" ", 1))
                     $("#date3").html(`${forcastResponse.list[19].dt_txt}`.split(" ", 1))
@@ -187,7 +185,10 @@
                 })
             })
         })
-    });
+    };
+
+    searchBtn.on("click", ajaxSearch)
+    // $(".list-group-item").on("click", ajaxSearch)
 
 
 </script>

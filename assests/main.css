@@ -59,7 +59,17 @@ section {
     font-size: 12px;
 }
 
-.bold{
+.bold {
     font-weight: bold;
 }
 
+.list-group-item {
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.list-group-item:hover {
+    background-color: cadetblue;
+    color: white;
+}
