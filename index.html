@@ -188,7 +188,10 @@
     };
 
     searchBtn.on("click", ajaxSearch)
-    $(".list-group-item").on("click", ajaxSearch)
+    
+    $(document).on('click', '.list-group-item', function() {
+        
+    })
 
 
 </script>
