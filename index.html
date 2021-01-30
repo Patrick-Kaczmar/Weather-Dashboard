@@ -115,22 +115,31 @@
     var userInput = $("#userInput")
     var currentDate = new Date()
 
-    var ajaxSearch = function () {
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userInput.val() + "&appid=" + apiKey
-        console.log(userInput.val());
+    var ajaxSearch = function (event) {
+
+        if (event.target.matches("button")) {
+            var selectorValue = userInput.val()
+        } else if (event.target.matches(".list-group-item")) {
+            selectorValue = event.target.textContent
+        }
+
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + selectorValue + "&appid=" + apiKey
+
+        console.log(selectorValue);
         console.log(queryURL);
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            saveCity();
 
             function saveCity() {
-                if (response) {
-                    ul.prepend(`<li class="list-group-item">${userInput.val()}</li>`)
+                if (response && event.target.matches("button")) {
+                    ul.prepend(`<li class="list-group-item">${selectorValue}</li>`)
                 }
             }
+
+            saveCity();
 
             var uvURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + apiKey
             var curIcon = "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
@@ -150,7 +159,7 @@
                 $("#curWind").html(`Wind Speed: ${response.wind.speed} MPH`)
                 $("#curUV").html(`UV Index: ${uvResponse.current.uvi}`)
 
-                var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + userInput.val() + "&appid=" + apiKey
+                var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + selectorValue + "&appid=" + apiKey
 
                 $.ajax({
                     url: fiveDay,
@@ -189,9 +198,7 @@
 
     searchBtn.on("click", ajaxSearch)
     
-    $(document).on('click', '.list-group-item', function() {
-        
-    })
+    $(document).on('click', '.list-group-item', ajaxSearch)
 
 
 </script>
