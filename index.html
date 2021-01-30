@@ -157,7 +157,17 @@
                 $("#curTemp").html(`Temp: ${temp}&deg;F`)
                 $("#curHumid").html(`Humidity: ${uvResponse.current.humidity} %`)
                 $("#curWind").html(`Wind Speed: ${response.wind.speed} MPH`)
-                $("#curUV").html(`UV Index: ${uvResponse.current.uvi}`)
+                var currentUV = $("#curUV").html(`UV Index: ${uvResponse.current.uvi}`)
+
+                if (uvResponse.current.uvi < 3) {
+                    currentUV.attr("class", "green")
+                } else if (uvResponse.current.uvi >= 3 && uvResponse.current.uvi < 6) {
+                    currentUV.attr("class", "yellow")
+                } else if (uvResponse.current.uvi >= 6 && uvResponse.current.uvi < 8) {
+                    currentUV.attr("class", "orange")
+                } else {
+                    currentUV.attr("class", "red")
+                }
 
                 var fiveDay = "https://api.openweathermap.org/data/2.5/forecast?q=" + selectorValue + "&appid=" + apiKey
 
