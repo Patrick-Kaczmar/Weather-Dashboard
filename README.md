@@ -8,4 +8,4 @@ Bootstrap was used to create premade card classes for the saved cities list, the
 
 ## link to deployed application - https://patrick-kaczmar.github.io/Weather-Dashboard/
 
-![website-preview](assets/Dashboard.png)
+![website-preview](assests/Dashboard.png)
