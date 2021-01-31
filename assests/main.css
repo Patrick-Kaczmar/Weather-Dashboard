@@ -14,11 +14,6 @@ main {
     text-align: center;
 }
 
-#cardLabel {
-    font-size: 30px;
-    padding-left: 40px;
-}
-
 aside {
     float: left;
     background-color: rgb(109, 149, 194);
@@ -28,6 +23,41 @@ section {
     width: 60%;
     margin: 50px 0 0 430px;
     height: 250px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.list-group-item {
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.list-group-item:hover {
+    background-color: cadetblue;
+    color: white;
+}
+
+.col {
+    padding: 15px 0px;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.red {
+    background-color: red;
 }
 
 #currentCity {
@@ -51,41 +81,11 @@ section {
     text-align: center;
 }
 
-.col {
-    padding: 15px 0px;
-}
-
 #forcast p {
     font-size: 12px;
 }
 
-.bold {
-    font-weight: bold;
-}
-
-.list-group-item {
-    text-align: center;
-    cursor: pointer;
-    font-size: 25px;
-}
-
-.list-group-item:hover {
-    background-color: cadetblue;
-    color: white;
-}
-
-.green {
-    background-color: green;
-}
-
-.yellow {
-    background-color: yellow;
-}
-
-.orange {
-    background-color: orange;
-}
-
-.red {
-    background-color: red;
+#cardLabel {
+    font-size: 30px;
+    padding-left: 40px;
 }
